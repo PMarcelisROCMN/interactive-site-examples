@@ -16,15 +16,15 @@ const themes = [
     }
 ];
 
-let currentTheme = 0;
+let currentThemeIndex = 0;
 
 const background = document.querySelector('.background');
 const body = document.querySelector('body');
 const button = document.getElementById('themeButton');
 
 document.getElementById('themeButton').addEventListener('click', () => {
-    currentTheme = (currentTheme + 1) % themes.length;
-    const theme = themes[currentTheme];
+    currentThemeIndex = (currentThemeIndex + 1) % themes.length;
+    const theme = themes[currentThemeIndex];
     setTheme(theme);
 });
 
@@ -34,4 +34,4 @@ function setTheme(theme) {
     button.style.setProperty('--button-color', theme.buttonColor);
 }
 
-setTheme(themes[currentTheme]);
+setTheme(themes[currentThemeIndex]);
