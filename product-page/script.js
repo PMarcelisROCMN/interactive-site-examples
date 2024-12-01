@@ -96,3 +96,36 @@ prevButton.addEventListener('click', () => {
 
 // Initial setup
 updateTheme(currentIndex);
+
+const imagePath = 'assets/scooter.png';
+let imageIndex = 0;
+var greenColor = '#e8f5e9';
+
+let blueBackgroundColorPrimary = '#e3f2fd';
+let blueBackgroundColorSecondary = '#64b5f6';
+let activeImage = 'assets/smoothie_blue.png';
+let activeItemIndex = 4;
+let backgroundImage = 'assets/smoothie_blueBackground.png';
+
+let greenBackgroundColorPrimary = '#e8f5e9';
+let greenBackgroundColorSecondary = '#a5d6a7';
+let greenActiveImage = 'assets/smoothie_green.png';
+let greenActiveItemIndex = 3;
+let greenBackgroundImage = 'assets/smoothie_greenBackground.png';
+
+const primaryBackgroundColor = document.querySelector('.primary-background-color');
+const secondaryBackgroundColor = document.querySelector('.secondary-background-color');
+const activeImageElement = document.querySelector('.active-image img');
+const items = document.querySelectorAll('.active-item');
+
+const greenSmoothieButton = document.querySelector('.green-smoothie');
+
+greenSmoothieButton.addEventListener('click', () => {
+  primaryBackgroundColor.style.backgroundColor = greenBackgroundColorPrimary;
+  secondaryBackgroundColor.style.backgroundColor = greenBackgroundColorSecondary;
+  activeImageElement.src = greenActiveImage;
+  items.forEach(element => {
+    element.classList.remove('active');
+  });
+  items[greenActiveItemIndex].classList.add('active');
+});
