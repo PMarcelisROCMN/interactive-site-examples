@@ -1,0 +1,207 @@
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  color: #333;
+  background-color: #f5f5f5;
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.navbar ul {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+}
+
+.navbar a {
+  text-decoration: none;
+  color: #333;
+  font-size: 1rem;
+}
+
+.auth-buttons {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.auth-buttons .signup {
+  background-color: #000;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  text-decoration: none;
+}
+
+.auth-buttons .signup:hover {
+  background-color: #333;
+}
+
+/* Hero Section */
+.hero-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 3rem 5rem;
+  background-color: #e8f5e9; /* Light green background initially */
+  height: 80vh;
+  position: relative;
+  overflow: hidden;
+  transition: background-color 0.3s ease;
+}
+
+/* Circular Shapes in Hero Section */
+.hero-section::before {
+  content: '';
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  background-color: var(--circle-color-1, #a5d6a7); /* Default green */
+  border-radius: 50%;
+  top: -100px;
+  left: -100px;
+  z-index: 0;
+  transition: background-color 0.3s ease;
+}
+
+.hero-section::after {
+  content: '';
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  background-color: var(--circle-color-2, #81c784); /* Default green */
+  border-radius: 50%;
+  bottom: -50px;
+  right: -50px;
+  z-index: 0;
+  transition: background-color 0.3s ease;
+}
+
+/* Adjusting content and image to stay above shapes */
+.content, .scooter-image {
+  position: relative;
+  z-index: 1;
+}
+
+.content h1 {
+  font-size: 3rem;
+  font-weight: bold;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+
+.content h1 span {
+  color: #000;
+}
+
+.content p {
+  margin-bottom: 2rem;
+  font-size: 1.2rem;
+  color: #666;
+}
+
+.cta-buttons {
+  display: flex;
+  gap: 1rem;
+}
+
+.cta-buttons .primary-cta {
+  background-color: #000;
+  color: #fff;
+  padding: 0.8rem 1.5rem;
+  border-radius: 4px;
+  text-decoration: none;
+  font-size: 1rem;
+}
+
+.cta-buttons .primary-cta:hover {
+  background-color: #333;
+}
+
+.cta-buttons .secondary-cta {
+  color: #000;
+  text-decoration: underline;
+  font-size: 1rem;
+}
+
+.scooter-image {
+  height: 90%;
+  display: flex;
+  flex: 1;
+}
+
+.scooter-image img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Carousel Buttons */
+.caroussel-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+  flex: 1;
+}
+
+.caroussel-buttons button {
+  background-color: #000;
+  color: #fff;
+  border: none;
+  padding: 0.7rem 1.2rem;
+  font-size: 1.5rem;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.caroussel-buttons button:hover {
+  background-color: #004d40; /* Darker green initially */
+}
+
+.caroussel-buttons button:active {
+  transform: scale(1.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Stats Section */
+.stats {
+  display: flex;
+  justify-content: space-around;
+  padding: 2rem 1rem;
+  background-color: #f5f5f5;
+}
+
+.stat {
+  text-align: center;
+}
+
+.stat h3 {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.stat p {
+  font-size: 1rem;
+  color: #666;
+}
