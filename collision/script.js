@@ -1,6 +1,9 @@
 const canvas = document.getElementById('myCanvas');
 const ctx = canvas.getContext('2d');
 
+canvas.width = window.innerWidth - 500;
+canvas.height = window.innerHeight - 500;
+
 
 canvas.addEventListener('mousedown', (event) => {
     getMousePosition(canvas, event);
