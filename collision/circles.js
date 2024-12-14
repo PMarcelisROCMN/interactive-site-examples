@@ -61,3 +61,19 @@ function update() {
 }
 
 update();
+
+const name = "Peter";
+
+class NamePrinter {
+
+    constructor(nameToPrint) {
+        this.name = nameToPrint;
+    }
+
+    print() {
+        console.log(this.name);
+    }
+}
+
+const namePrinter = new NamePrinter('Mara');
+namePrinter.print();
