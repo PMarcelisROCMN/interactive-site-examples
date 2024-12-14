@@ -5,6 +5,7 @@ canvas.width = window.innerWidth - 500;
 canvas.height = window.innerHeight - 500;
 
 class Target {
+
     constructor(x, y, radius, imagePath) {
         this.x = x;
         this.y = y;
@@ -13,7 +14,7 @@ class Target {
         this.image.src = imagePath;
         this.imageLoaded = false;
         this.image.onload = () => {
-            this.imageLoaded = true; // Mark the image as loaded
+            this.imageLoaded = true;
         };
 
         canvas.addEventListener('click', (event) => {
@@ -60,9 +61,3 @@ function update() {
 }
 
 update();
-
-function printName(name){
-    console.log(name);
-}
-
-printName('Taylor Swift');
