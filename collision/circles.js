@@ -6,16 +6,10 @@ canvas.height = window.innerHeight - 500;
 
 class Target {
 
-    constructor(x, y, radius, imagePath) {
+    constructor(x, y, radius) {
         this.x = x;
         this.y = y;
         this.radius = radius;
-        this.image = new Image();
-        this.image.src = imagePath;
-        this.imageLoaded = false;
-        this.image.onload = () => {
-            this.imageLoaded = true;
-        };
 
         canvas.addEventListener('click', (event) => {
             this.checkIfClicked(event);
@@ -23,57 +17,43 @@ class Target {
     }
 
     draw() {
-        if (this.imageLoaded) {
-            ctx.drawImage(this.image, this.x, this.y, this.radius * 2, this.radius * 2);
-        }
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.fillStyle = 'red';
+        ctx.fill();
     }
 
     checkIfClicked(event) {
         const rect = canvas.getBoundingClientRect();
-        const mouseX = event.clientX - rect.left;
-        const mouseY = event.clientY - rect.top;
-
-        // Adjust the circle's center
-        const centerX = this.x + this.radius;
-        const centerY = this.y + this.radius;
-
-        const distance = Math.sqrt((mouseX - centerX) ** 2 + (mouseY - centerY) ** 2);
-
+        const mouseX = event.clientX - rect.left; // Mouse X relative to canvas
+        const mouseY = event.clientY - rect.top; // Mouse Y relative to canvas
+    
+        // The circle's center is already (this.x, this.y)
+        const distance = Math.sqrt((mouseX - this.x) ** 2 + (mouseY - this.y) ** 2);
+    
         if (distance <= this.radius) {
-            console.log('Clicked on the circle');
+            this.getHit();
         }
+    }
+    
+
+    getHit() {
+        console.log('Circle clicked');
+        this.radius = Math.random() * 300 + 30;
+        this.x = Math.random() * canvas.width + 1;
+        this.y = Math.random() * canvas.height + 1;
+        console.log('New Circle X:', this.x, 'New Circle Y:', this.y, 'New Circle Radius:', this.radius);
     }
 }
 
-const smallTarget = new Target(300, 100, 50, 'target.png');
-const bigTarget = new Target(50, 400, 100, 'target.png');
+const smallTarget = new Target(200, 200, 50, 'target.png');
 
-
-const circle1 = new Target(300, 100, 50, 'target.png');
-const circle2 = new Target(50, 100, 80, 'target.png');
 
 function update() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     
-    circle1.draw();
-    circle2.draw();
+    smallTarget.draw();
     requestAnimationFrame(update);
 }
 
 update();
-
-const name = "Peter";
-
-class NamePrinter {
-
-    constructor(nameToPrint) {
-        this.name = nameToPrint;
-    }
-
-    print() {
-        console.log(this.name);
-    }
-}
-
-const namePrinter = new NamePrinter('Mara');
-namePrinter.print();
