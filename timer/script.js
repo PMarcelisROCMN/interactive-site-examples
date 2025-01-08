@@ -24,10 +24,10 @@ function update(currentTime) {
     lastTime = currentTime; // Update the last frame's timestamp
 
     // Use deltaTime for frame-by-frame updates
-    console.log(`Delta Time: ${deltaTime.toFixed(3)} seconds`);
+    // console.log(`Delta Time: ${deltaTime.toFixed(3)} seconds`);
 
     // Display total elapsed time
-    console.log(`Total Elapsed Time: ${totalElapsedTime.toFixed(1)} seconds`);
+    // console.log(`Total Elapsed Time: ${totalElapsedTime.toFixed(1)} seconds`);
 
     timerDisplay.textContent = totalElapsedTime.toFixed(1);
 
@@ -60,6 +60,8 @@ function loadFromCookies (){
     .split('; ')
     .find(row => row.startsWith(cookieKey + '='));
 
+  console.log(cookieData);
+
   if (cookieData) {
     resetData = JSON.parse((cookieData.split('=')[1]));
     console.log(resetData);
@@ -80,3 +82,4 @@ const updateLog = () => {
 loadFromCookies();
 requestAnimationFrame(update);
 
+document.cookie = 'counter=' + 500;
