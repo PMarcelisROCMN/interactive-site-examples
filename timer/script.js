@@ -53,19 +53,18 @@ function saveToCookies(){
   console.log(JSON.stringify(resetData));
 }
 
+var cookie = loadFromCookies('cookieName');
+
 
 // Load data from cookies
-function loadFromCookies (){
+function loadFromCookies (cookieKey){
   const cookieData = document.cookie
     .split('; ')
     .find(row => row.startsWith(cookieKey + '='));
 
-  console.log(cookieData);
-
   if (cookieData) {
-    resetData = JSON.parse((cookieData.split('=')[1]));
-    console.log(resetData);
-    updateLog();
+    var data = (cookieData.split('=')[1]);
+    return data;
   }
 };
 
@@ -83,3 +82,8 @@ loadFromCookies();
 requestAnimationFrame(update);
 
 document.cookie = 'counter=' + 500;
+
+
+'cookieName="5"'
+
+// cookieName=  cookieName="5"

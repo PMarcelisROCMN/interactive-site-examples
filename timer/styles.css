@@ -71,3 +71,10 @@ body {
     color: #333;
   }
   
+  .container {
+    width: 300px; /* Adjust the width as needed */
+    height: 200px; /* Adjust the height as needed */
+    background-color: #3498db; /* Background color */
+    clip-path: polygon(0% 0%, 50% 50%, 0% 100%, 100% 100%, 50% 50%, 100% 0%);
+  }
+  

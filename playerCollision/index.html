@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas Gravity and Collision</title>
+    <style>
+        canvas {
+            display: block;
+            margin: 0 auto;
+            background: #ddd;
+        }
+    </style>
+</head>
+<body>
+<canvas id="gameCanvas" width="800" height="600"></canvas>
+<script>
+  class Rectangle {
+    constructor(x, y, width, height, color = "blue") {
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
+        this.color = color;
+        this.velocityY = 0; // Vertical velocity for gravity
+        this.gravity = 0.5; // Gravity acceleration
+        this.isOnGround = false; // Flag to check if standing on a platform
+    }
+
+    getLeft() {
+        return this.x;
+    }
+
+    getTop() {
+        return this.y;
+    }
+
+    getRight() {
+        return this.x + this.width;
+    }
+
+    getBottom() {
+        return this.y + this.height;
+    }
+
+    isCollidingWith(other) {
+        return (
+            this.getRight() > other.getLeft() &&
+            this.getLeft() < other.getRight() &&
+            this.getBottom() > other.getTop() &&
+            this.getTop() < other.getBottom()
+        );
+    }
+
+    applyGravity() {
+        if (!this.isOnGround) {
+            this.velocityY += this.gravity; // Apply gravity if not on the ground
+            this.y += this.velocityY; // Update position with velocity
+        }
+    }
+
+    resetVerticalVelocity() {
+        this.velocityY = 0; // Reset vertical velocity when standing on a platform
+    }
+
+    draw(context) {
+        context.fillStyle = this.color;
+        context.fillRect(this.x, this.y, this.width, this.height);
+    }
+}
+
+// Canvas setup
+const canvas = document.getElementById("gameCanvas");
+const context = canvas.getContext("2d");
+
+// Create player and platforms
+const player = new Rectangle(290, 50, 30, 30, "red");
+const platform = new Rectangle(100, 400, 200, 20, "green");
+const ground = new Rectangle(0, 580, 800, 20, "brown");
+
+// Game loop
+function gameLoop() {
+    // Clear canvas
+    context.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Apply gravity to the player
+    player.applyGravity();
+
+    // Check for collisions with platform
+    if (player.isCollidingWith(platform)) {
+        // Check if colliding from the top
+        if (player.velocityY > 0 && player.getBottom() > platform.getTop() && player.getTop() < platform.getTop()) {
+            player.y = platform.getTop() - player.height; // Place player on top of platform
+            player.resetVerticalVelocity();
+            player.isOnGround = true;
+        }
+    } else {
+        player.isOnGround = false; // Player is not on the platform
+    }
+
+    // Check for collisions with ground
+    if (player.isCollidingWith(ground)) {
+        // Check if colliding from the top
+        if (player.velocityY > 0 && player.getBottom() > ground.getTop() && player.getTop() < ground.getTop()) {
+            player.y = ground.getTop() - player.height; // Place player on top of ground
+            player.resetVerticalVelocity();
+            player.isOnGround = true;
+        }
+    }
+
+    // Draw everything
+    ground.draw(context);
+    platform.draw(context);
+    player.draw(context);
+
+    // Repeat the loop
+    requestAnimationFrame(gameLoop);
+}
+
+// Start the game loop
+gameLoop();
+
+</script>
+</body>
+</html>
